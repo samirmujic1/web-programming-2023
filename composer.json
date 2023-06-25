@@ -1,4 +1,4 @@
 {
-    "require": {"php":"8.2.4",
+    "require": {
         "mikecao/flight": "^2.0"}
 }

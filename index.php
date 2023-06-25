@@ -1,9 +1,8 @@
 <?php
-require 'vendor/autoload.php';
 
-Flight::route('/', function(){
-    echo 'Hello world';
-});
+require_once("rest/dao/TodoDao.Class.php");
+$dao = new TodoDao();
+$results= $dao->get_all();
+print_r($results);
 
-Flight::start();
 ?>
