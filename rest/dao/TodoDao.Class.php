@@ -44,7 +44,6 @@ public function add($UserID, $LastName) {
 /** Method used to delete Users for the database  */
 
 public function delete($UserID){
-
     $stmt = $this->conn->prepare("DELETE FROM Users WHERE UserID=$UserID");
     $stmt->execute();
 }
