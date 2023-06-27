@@ -35,8 +35,8 @@ public function get_all(){
 
 public function add($UserID, $LastName) {
 
-    $stmt = $this->conn->prepare("INSERT INTO Users(UserID, LastName, FirstName, Address, City) VALUES('$UserID', '$LastName', 'Ahmed', 'Hamdije Cemerlica 16', 'Sarajevo')");
-    $stmt->execute();
+    $stmt = $this->conn->prepare("INSERT INTO Users(UserID, LastName, FirstName, Address, City) VALUES(:UserID, :LastName, 'Ahmed', 'Hamdije Cemerlica 16', 'Sarajevo')");
+    $stmt->execute(['UserID' => $UserID, 'LastName' => $LastName]);
 
 
 }
@@ -44,7 +44,8 @@ public function add($UserID, $LastName) {
 /** Method used to delete Users for the database  */
 
 public function delete($UserID){
-    $stmt = $this->conn->prepare("DELETE FROM Users WHERE UserID=$UserID");
+    $stmt = $this->conn->prepare("DELETE FROM Users WHERE UserID=:UserID");
+    $stmt -> bindParam(':UserID', $UserID); //SQL injection prevention
     $stmt->execute();
 }
 
@@ -52,8 +53,8 @@ public function delete($UserID){
 
 public function update($UserID, $LastName, $FirstName, $Address, $City){
 
-    $stmt = $this->conn->prepare("UPDATE Users SET LastName='$LastName', FirstName='$FirstName', Address='$Address', City='$City' WHERE UserID=$UserID");
-    $stmt->execute();
+    $stmt = $this->conn->prepare("UPDATE Users SET LastName=:LastName, FirstName=:FirstName, Address=:Address, City=:City WHERE UserID=:UserID");
+    $stmt->execute(['UserID' => $UserID, 'LastName' => $LastName, 'FirstName' => $FirstName, 'Address' => $Address, 'City' => $City]);
 
 }
 
